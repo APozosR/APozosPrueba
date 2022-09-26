@@ -1,0 +1,51 @@
+﻿@model ML.Automovil
+
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Automovil</h2>
+
+<div class="row">
+    <div class="col-md-12">
+        <h5>Selecciona un automovil o presiona + para agregar uno nuevo</h5>
+        <hr />
+    </div>
+</div>
+
+<div style="float:right;">
+    @Html.ActionLink("+","Form", "Automovil", htmlAttributes: new { @class = "btn btn-success" })
+</div>
+
+<br>
+
+<table class="table table-bordered table-responsive">
+    <thead>
+        <tr>
+        <td>Editar</td>
+        <td class="hidden">IdAutomovil</td>
+        <td>Nombre</td>
+        <td>Color</td>
+        <td>NumeroPuertas</td>
+        <td>Placas</td>
+        <td>Marca</td>
+        <td>Eliminar</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (ML.Automovil auto in Model.Automoviles)
+        {
+            <tr>
+                <td><a class="btn btn-warning glyphicon glyphicon-edit" href="@Url.Action("Form","Automovil", new {IdAutomovil = auto.IdAutomovil})"></a></td>
+                <td class="hidden">@auto.IdAutomovil</td>
+                <td>@auto.Modelo</td>
+                <td>@auto.Color</td>
+                <td>@auto.NumeroPuertas</td>
+                <td>@auto.Placas.IdPlacas</td>
+                <td>@auto.Marca.IdMarca</td>
+                <td><a class="btn btn-danger glyphicon glyphicon-trash" href="@Url.Action("Delete","Automovil", new{IdAutomovil = auto.IdAutomovil})" onclick = "return confirm('¿Seguro que deseas eliminar el departamento?');"></a></td>
+            </tr>
+        }
+    </tbody>
+</table>

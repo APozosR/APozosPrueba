@@ -1,0 +1,78 @@
+﻿@model ML.Automovil
+@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Form</h2>
+<div class="row">
+    <div class="container">
+        <div class="col-md-12">
+            <h2>Automovil</h2>
+            <h5>Ingresa los datos</h5>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <hr />
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        @using (Html.BeginForm("Form", "Automovil", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="hidden">
+                <div class="col-md-4 col-12 col-sm-6" style="display: none;">
+                    @Html.LabelFor(model => model.IdAutomovil)
+                    @Html.TextBoxFor(model => model.IdAutomovil, new {@class="form-control", id="txtIdAutomovil"})
+                   
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="col-md-4 col-12 col-sm-6">
+                    @Html.LabelFor(model => model.Modelo)
+                    @Html.TextBoxFor(model => model.Modelo, new { @class = "form-control", id = "txtModelo" })
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="col-md-4 col-12 col-sm-6">
+                    @Html.LabelFor(model => model.Color)
+                    @Html.TextBoxFor(model => model.Color, new { @class = "form-control", id = "txtColor" })
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="col-md-4 col-12 col-sm-6">
+                    @Html.LabelFor(model => model.NumeroPuertas)
+                    @Html.TextBoxFor(model => model.NumeroPuertas, new { @class = "form-control", id = "txtNumeroPuertas" })
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="col-md-4 col-12 col-sm-6">
+                    @Html.LabelFor(model => model.Placa.IdPlacas)
+                    @Html.DropDownListFor(model => model.Placa.IdPlacas, new SelectList(Model.Placa.Placas, "IdPlaca", "Nombre"), "Selecciona un placa correspondiente", new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="col-md-4 col-12 col-sm-6">
+                    @Html.LabelFor(model => model.Marca.IdMarca)
+                    @Html.DropDownListFor(model => model.Marca.IdMarca, new SelectList(Model.Marca.Marcas, "IdMarca", "Nombre"), "Selecciona un marca correspondiente", new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="col-md-3">
+                    <input type="submit" value="Guardar" class="btn btnsucces" />
+                    @Html.ActionLink("Regresar", "GetAll", "Automovil", htmlAttributes: new { @class = "btn btn-danger" })
+                </div>
+            </div>
+        }
+    </div>
+</div>
